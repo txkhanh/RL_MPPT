@@ -1,18 +1,44 @@
-# Q-Learning MPPT for Photovoltaic (PV) Systems
+# Q-Learning & Deep Q-Learning (DQN) for MPPT in Photovoltaic (PV) Systems
 
-This repository provides an implementation of a **Q-learning-based Maximum Power Point Tracking (MPPT)** controller for photovoltaic (PV) systems. The controller adjusts the duty cycle of a DC/DC converter to maximize PV output power under varying irradiance and temperature conditions.
+This repository provides two reinforcement learning-based Maximum Power Point Tracking (MPPT) controllers for photovoltaic (PV) systems:
+1. **Q-Learning MPPT** – Tabular Q-learning without prior PV curve knowledge.
+2. **DQN MPPT** – Deep Q-Learning with neural network function approximation for better scalability.
+
+Both controllers adjust the **duty cycle** of a DC/DC converter to maximize PV output power under varying irradiance and temperature conditions.
+
+---
 
 ## Features
-- **Physical PV model** based on Standard Test Conditions (STC).
-- **Q-learning-based MPPT** without prior PV curve knowledge.
-- Simulations under:
+
+### Common Features
+- Physical PV model based on Standard Test Conditions (STC).
+- Adaptive MPPT control under:
   - Fixed environmental conditions.
   - Changing temperature.
   - Changing irradiance.
 - Real-time duty cycle adjustment.
-- Visualization of irradiance/temperature, PV power tracking, and duty cycle.
+- Visualization of:
+  - Irradiance & Temperature.
+  - PV Power Tracking (Actual Power vs Maximum Power).
+  - Duty Cycle Evolution.
+
+### Q-Learning Specific
+- Tabular Q-value updates.
+- Discrete state-action representation.
+- Suitable for small, well-defined state spaces.
+
+### DQN Specific
+- Neural network-based Q-function approximation.
+- Replay buffer for experience storage.
+- Mini-batch gradient descent training.
+- Scales to larger, continuous state spaces.
+
+---
 
 ## Requirements
-Python **3.8+** is recommended. Install dependencies:
+
+Python **3.8+** is recommended.  
+Install required dependencies:
+
 ```bash
-pip install numpy matplotlib scipy
+pip install numpy matplotlib torch
