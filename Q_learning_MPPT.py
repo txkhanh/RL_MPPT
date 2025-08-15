@@ -188,17 +188,16 @@ if __name__ == "__main__":
         
 
     #     if step % 100 == 0:
-    #         print(f"Bước {step}: D={D:.3f}, P={P:.2f} W, MPP={mpp_power:.2f} W")
-        
+    #         print(f"Step {step}: D={D:.3f}, P={P:.2f} W, MPP={mpp_power:.2f} W")
 
-    # print("Huấn luyện hoàn tất.")
-    # print(f"Sai số công suất cuối: {abs(mpp_power_history[-1] - power_history[-1]):.2f} W")
-    
-    
+    # print("Training complete.")
+    # print(f"Final power error: {abs(mpp_power_history[-1] - power_history[-1]):.2f} W")
+
+
 # 2. Simulate changing temperature conditions
-    # steps = 3000  # 3 giai đoạn, mỗi giai đoạn 300 bước (3 giây)
+    # steps = 3000  # 3 stages, each 300 steps (3 seconds)
 
-    # # --- Khởi tạo môi trường ban đầu ---
+    # # --- Initialize the initial environment ---
     # pv.set_environment(irradiance=1000, temperature=25)
 
     # D = controller.current_duty_cycle
@@ -208,7 +207,7 @@ if __name__ == "__main__":
     # temperature_history = []
 
     # for step in range(steps):
-    #     # Thay đổi nhiệt độ theo từng giai đoạn
+    #     # Change temperature according to each stage
     #     if step == 1000:
     #         pv.set_environment(irradiance=1000, temperature=40)
     #     elif step == 2000:
@@ -225,21 +224,20 @@ if __name__ == "__main__":
     #     temperature_history.append(pv.T_pv)
 
     # if step % 100 == 0:
-    #     print(f"Bước {step}: T={pv.T_pv}°C, D={D:.3f}, P={P:.2f} W, MPP={mpp_power:.2f} W")
+    #     print(f"Step {step}: T={pv.T_pv}°C, D={D:.3f}, P={P:.2f} W, MPP={mpp_power:.2f} W")
 
-    # print("Huấn luyện hoàn tất.")
-    # print(f"Sai số công suất cuối: {abs(mpp_power_history[-1] - power_history[-1]):.2f} W")
-    
-    
-    
-# 3. Simulate changing irradiance conditions   
-    steps = 3000  # 900 bước = 9 giây
+    # print("Training complete.")
+    # print(f"Final power error: {abs(mpp_power_history[-1] - power_history[-1]):.2f} W")
 
-    # Giai đoạn 1: G = 400 W/m²
-    # Giai đoạn 2: G = 1000 W/m²
-    # Giai đoạn 3: G = 600 W/m²
 
-    pv.set_environment(irradiance=1000, temperature=25)  # Gán lần đầu
+# 3. Simulate changing irradiance conditions
+    steps = 3000  # 900 steps = 9 seconds
+
+    # Stage 1: G = 400 W/m²
+    # Stage 2: G = 1000 W/m²
+    # Stage 3: G = 600 W/m²
+
+    pv.set_environment(irradiance=1000, temperature=25)  # Initial assignment
     D = controller.current_duty_cycle
     duty_history = []
     power_history = []
@@ -267,10 +265,10 @@ if __name__ == "__main__":
 
 
 
-    # # --- Vẽ toàn bộ 3 biểu đồ trong cùng 1 hình ---
+    # # --- Plot  ---
     # plt.figure(figsize=(12, 10))
 
-    # # 1. Công suất PV và MPP
+# Plot 1. PV Power and MPP  
     # plt.subplot(3, 1, 1)
     # plt.plot(power_history, label="PV Power (RL)")
     # plt.plot(mpp_power_history, '--', label="Reference PV Power at Maximum Power Point (MPP)")
@@ -287,7 +285,7 @@ if __name__ == "__main__":
     # plt.legend()
     # plt.grid(True)
 
-    # # 3. Sai số công suất P - Pmax
+    # # 3. Final power error: P - Pmax
     # plt.subplot(3, 1, 3)
     # plt.plot(np.array(power_history) - np.array(mpp_power_history), label="P - Pmax", color='red')
     # plt.axhline(0, linestyle='--', color='gray')
@@ -301,7 +299,7 @@ if __name__ == "__main__":
 
     plt.figure(figsize=(12, 8))
 
-# Plot 1: Temperature
+# Plot 2: Temperature
     # plt.subplot(3, 1, 1)
     # plt.plot(time_axis, temperature_history, label="PV Temperature (°C)", color='orange')
     # plt.ylabel("Temperature (°C)")
@@ -328,7 +326,7 @@ if __name__ == "__main__":
     # plt.grid(True)
 
 
-    # Plot 1: Irradiance (G_pv)
+# Plot 3: Irradiance (G_pv)
     plt.subplot(3, 1, 1)
     plt.plot(time_axis, irradiance_history, label="Irradiance (G_pv)", color='gold')
     plt.ylabel("Irradiance (W/m²)")
