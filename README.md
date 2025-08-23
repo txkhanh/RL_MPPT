@@ -27,11 +27,23 @@ Both controllers adjust the **duty cycle** of a DC/DC converter to maximize PV o
 - Discrete state-action representation.
 - Suitable for small, well-defined state spaces.
 
+1. Fix environmental conditions
+<img width="3199" height="1774" alt="image" src="https://github.com/user-attachments/assets/c736402c-7e05-424c-be27-d918a4169ee3" />
+
+2. Simulate changing temperature conditions
+<img width="3199" height="1764" alt="image" src="https://github.com/user-attachments/assets/4dce8ba5-0b54-41c6-bf74-6a39846067ab" />
+
+3. Simulate changing irradiance conditions
+<img width="3190" height="1773" alt="image" src="https://github.com/user-attachments/assets/8ddba68c-f1a1-4f69-a1fb-9c2265f9d1eb" />
+
 ### DQN Specific
 - Neural network-based Q-function approximation.
 - Replay buffer for experience storage.
 - Mini-batch gradient descent training.
 - Scales to larger, continuous state spaces.
+
+<img width="3199" height="1786" alt="image" src="https://github.com/user-attachments/assets/f918ee7c-8e09-45e5-aeb8-0e24cce47b7e" />
+
 
 ---
 
